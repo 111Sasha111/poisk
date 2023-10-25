@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+
+// Функция, реализующая бинарный поиск в отсортированном массиве
+int binarySearch(int arr[], int left, int right, int x) {
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        
+        // Проверяем, является ли средний элемент равным искомому значению
+        if (arr[mid] == x)
+            return mid;
+        
+        // сужаем диапазон до левой половины массива
+        if (arr[mid] > x)
+            right = mid - 1;
+        
+        // сужаем диапазон до правой половины массива
+        else
+            left = mid + 1;
+    }
+    
+    // Элемент не найден
+    return -1;
+}
+
+int main() {
+    int arr[] = {4, 6, 8, 10, 12};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int x = 4;
+    
+    int result = binarySearch(arr, 0, n - 1, x);
+    
+    if (result == -1)
+        cout << "Элемент не найден" << endl;
+    else
+        cout << "Элемент найден на позиции " << result << endl;
+    
+    return 0;
+}
